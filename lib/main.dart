@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:superhero_flutter/bindings/home_binding.dart';
 import 'package:superhero_flutter/screens/hero_details.dart';
 import 'package:superhero_flutter/screens/home_screen.dart';
 import 'package:superhero_flutter/screens/splash_screen.dart';
@@ -16,8 +17,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
     return GetMaterialApp(
       title: 'Superhero Lexicon',
       debugShowCheckedModeBanner: false,
@@ -37,9 +39,10 @@ class MyApp extends StatelessWidget {
         ),
       ),
       initialRoute: HomeScreen.route,
+      initialBinding: HomeBinding(),
       getPages: [
         GetPage(name: SplashScreen.route, page: () => const SplashScreen()),
-        GetPage(name: HomeScreen.route, page: () => const HomeScreen()),
+        GetPage(name: HomeScreen.route, page: () => const HomeScreen(),binding: HomeBinding()),
         GetPage(name: HeroDetails.route, page: () => const HeroDetails()),
     ],
     );
