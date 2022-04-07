@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:superhero_flutter/components/superhero_item.dart';
 import 'package:superhero_flutter/controllers/home_controller.dart';
 import 'package:superhero_flutter/model/superhero.dart';
+import 'package:superhero_flutter/screens/hero_details_screen.dart';
 import 'package:superhero_flutter/theme/colors.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -55,8 +56,9 @@ class HomeScreen extends StatelessWidget {
                                 return SuperheroItem(
                                   superhero: item,
                                   onHeroClick: (Superhero hero) {
-                                    //Get.snackbar(hero.name, hero.biography.fullName).show();
-                                    print(hero.name);
+                                    // print(hero.name);
+                                    Get.toNamed(HeroDetailsScreen.route,
+                                    arguments: { 'heroId' : hero.id});
                                   },
                                 );
                               },

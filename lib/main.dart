@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:superhero_flutter/bindings/hero_details_binding.dart';
 import 'package:superhero_flutter/bindings/home_binding.dart';
-import 'package:superhero_flutter/screens/hero_details.dart';
+import 'package:superhero_flutter/screens/hero_details_screen.dart';
 import 'package:superhero_flutter/screens/home_screen.dart';
 import 'package:superhero_flutter/screens/splash_screen.dart';
 
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: SplashScreen.route, page: () => const SplashScreen()),
         GetPage(name: HomeScreen.route, page: () => const HomeScreen(),binding: HomeBinding()),
-        GetPage(name: HeroDetails.route, page: () => const HeroDetails()),
+        GetPage(name: HeroDetailsScreen.route, page: () => const HeroDetailsScreen(),binding: HeroDetailsBinding()),
     ],
     );
   }

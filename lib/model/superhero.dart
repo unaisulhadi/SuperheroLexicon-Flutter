@@ -1,10 +1,16 @@
 import 'dart:convert';
 
-List<Superhero> superheroFromJson(String str) =>
+Superhero superheroFromJson(String str) => Superhero.fromJson(json.decode(str));
+
+String superheroToJson(Superhero data) => json.encode(data.toJson());
+
+List<Superhero> superheroesFromJson(String str) =>
     List<Superhero>.from(json.decode(str).map((x) => Superhero.fromJson(x)));
 
-String superheroToJson(List<Superhero> data) =>
+String superheroesToJson(List<Superhero> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+
 
 class Superhero {
   late int id;
