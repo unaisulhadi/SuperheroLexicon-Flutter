@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:superhero_flutter/components/superhero_item.dart';
 import 'package:superhero_flutter/controllers/home_controller.dart';
+import 'package:superhero_flutter/model/superhero.dart';
 import 'package:superhero_flutter/theme/colors.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -51,12 +52,18 @@ class HomeScreen extends StatelessWidget {
                               itemCount: controller.heroes.length,
                               itemBuilder: (context, index) {
                                 var item = controller.heroes[index];
-                                return SuperheroItem(superhero: item);
+                                return SuperheroItem(
+                                  superhero: item,
+                                  onHeroClick: (Superhero hero) {
+                                    //Get.snackbar(hero.name, hero.biography.fullName).show();
+                                    print(hero.name);
+                                  },
+                                );
                               },
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                childAspectRatio: 3/4,
+                                childAspectRatio: 3 / 4,
                               ),
                             ));
             })

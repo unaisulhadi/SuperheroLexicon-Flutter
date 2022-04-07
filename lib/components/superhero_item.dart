@@ -4,8 +4,9 @@ import 'package:superhero_flutter/theme/colors.dart';
 
 class SuperheroItem extends StatelessWidget {
   late Superhero superhero;
+  final Function(Superhero) onHeroClick;
 
-  SuperheroItem({required this.superhero});
+  SuperheroItem({required this.superhero, required this.onHeroClick});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,9 @@ class SuperheroItem extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
           ),
-          Container(
+          GestureDetector(
+            onTap: () => onHeroClick(superhero),
+            child: Container(
             padding: const EdgeInsets.all(12.0),
             width: double.infinity,
             height: 50,
@@ -36,11 +39,12 @@ class SuperheroItem extends StatelessWidget {
               )
             ),
             child: Text(
-              superhero.name,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold
+                superhero.name,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold
+                ),
               ),
             ),
           )
