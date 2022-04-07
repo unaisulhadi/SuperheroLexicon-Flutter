@@ -15,7 +15,6 @@ class HttpServiceImpl implements HttpService{
       var result = await http.get(Uri.parse(BASE_URL + "all.json"));
       if (result.statusCode == 200) {
         var response = superheroFromJson(result.body);
-        print(response);
         return response;
       } else {
         print(result.reasonPhrase);
