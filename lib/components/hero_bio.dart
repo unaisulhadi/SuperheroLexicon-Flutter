@@ -21,7 +21,7 @@ class HeroBio extends StatelessWidget {
             style: TextStyle(
                 color: primaryTextColor,
                 fontSize: 20,
-                fontWeight: FontWeight.w500),
+                fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
           HeroBioItem(
@@ -67,7 +67,7 @@ class HeroBio extends StatelessWidget {
                     title: "Alignment"),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

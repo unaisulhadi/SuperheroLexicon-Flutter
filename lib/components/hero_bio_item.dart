@@ -44,7 +44,7 @@ class HeroBioItem extends StatelessWidget {
                   bioItem,
                   style: const TextStyle(
                       color: primaryDark,
-                      fontSize: 18,
+                      fontSize: 17,
                       fontWeight: FontWeight.bold),
                 ),
               ],

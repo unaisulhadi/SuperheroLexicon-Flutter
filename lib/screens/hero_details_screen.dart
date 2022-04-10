@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:superhero_flutter/components/hero_aliases.dart';
+import 'package:superhero_flutter/components/hero_appearance.dart';
 import 'package:superhero_flutter/components/hero_bio.dart';
+import 'package:superhero_flutter/components/hero_more_details.dart';
+import 'package:superhero_flutter/components/hero_power_stats.dart';
 import 'package:superhero_flutter/controllers/hero_details_controller.dart';
 import 'package:superhero_flutter/model/superhero.dart';
 import 'package:superhero_flutter/theme/colors.dart';
@@ -52,10 +56,10 @@ class HeroDetails extends StatelessWidget {
         children: [
           Stack(
             alignment: Alignment.bottomLeft,
-            children :[
+            children: [
               Image.network(
                 superhero.images.lg,
-                height: 480,
+                height: 100,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
@@ -66,10 +70,10 @@ class HeroDetails extends StatelessWidget {
                 alignment: Alignment.bottomLeft,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Colors.transparent, primaryDark.withOpacity(0.8)],
-                    )),
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.transparent, primaryDark.withOpacity(0.8)],
+                )),
                 child: Text(
                   superhero.name,
                   style: const TextStyle(
@@ -80,7 +84,17 @@ class HeroDetails extends StatelessWidget {
               ),
             ],
           ),
-          HeroBio(biography: superhero.biography,name: superhero.name,)
+          HeroBio(
+            biography: superhero.biography,
+            name: superhero.name,
+          ),
+          HeroPowerStats(powerstats: superhero.powerstats),
+          HeroAliases(aliases: superhero.biography.aliases),
+          HeroAppearance(appearance: superhero.appearance),
+          HeroMoreDetails(title: "OCCUPATION",details: superhero.work.occupation),
+          HeroMoreDetails(title: "BASE",details: superhero.work.base),
+          HeroMoreDetails(title: "GROUP AFFILIATION",details: superhero.connections?.groupAffiliation ?? "-"),
+          HeroMoreDetails(title: "RELATIVES",details: superhero.connections?.relatives ?? "-"),
         ],
       ),
     );
