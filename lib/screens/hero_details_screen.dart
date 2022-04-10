@@ -59,7 +59,7 @@ class HeroDetails extends StatelessWidget {
             children: [
               Image.network(
                 superhero.images.lg,
-                height: 100,
+                height: 400,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),

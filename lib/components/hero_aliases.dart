@@ -22,39 +22,32 @@ class HeroAliases extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            aliases.isNotEmpty
-                ? Row(
-                    children: aliases
-                        .map((item) => Row(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(8.0),
-                                  decoration: const BoxDecoration(
-                                      color: primaryTextColor,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(4))),
-                                  child: Text(
-                                    item,
-                                    style: const TextStyle(
-                                        color: primaryDark,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                const SizedBox(width: 8)
-                              ],
-                            ))
-                        .toList(),
-                  )
-                : Container(
-                    child: const Text(
-                      "No aliases found..!",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  )
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: aliases
+                    .map((item) => Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8.0),
+                              decoration: const BoxDecoration(
+                                  color: primaryTextColor,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(4))),
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                    color: primaryDark,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            const SizedBox(width: 8)
+                          ],
+                        ))
+                    .toList(),
+              ),
+            )
           ]),
     );
   }
