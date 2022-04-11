@@ -9,13 +9,15 @@ import 'package:superhero_flutter/theme/colors.dart';
 class HomeScreen extends StatelessWidget {
   static const route = "/home";
 
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+  final controller = Get.find<HomeController>();
 
   @override
-  Widget build(BuildContext context) {
-    final controller = Get.find<HomeController>();
+  final searchTextController = TextEditingController();
 
+  Widget build(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
+
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -32,12 +34,12 @@ class HomeScreen extends StatelessWidget {
         ),
         Obx(() => controller.isLoading.isTrue
             ? const Expanded(
-              child: Center(
+                child: Center(
                   child: CircularProgressIndicator(
                     color: primaryTextColor,
                   ),
                 ),
-            )
+              )
             : Expanded(
                 child: controller.heroes.isEmpty
                     ? const Center(
@@ -48,27 +50,91 @@ class HomeScreen extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ))
-                    : GridView.builder(
-                        padding: const EdgeInsets.all(0.0),
-                        itemCount: controller.heroes.length,
-                        itemBuilder: (context, index) {
-                          var item = controller.heroes[index];
-                          return HeroItem(
-                            superhero: item,
-                            onHeroClick: (Superhero hero) {
-                              // print(hero.name);
-                              Get.toNamed(HeroDetailsScreen.route,
-                                  arguments: {'heroId': hero.id});
-                            },
-                          );
-                        },
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 3 / 4,
-                        ),
+                    : Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.only(left: 8.0, right: 8.0),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: primaryTextColor,
+                                    width: 2,
+                                  ),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(6))),
+                              child: TextField(
+                                controller: searchTextController,
+                                maxLines: 1,
+                                onChanged: (value) {
+                                  controller.searchKey.value = value;
+                                  controller.searchSuperhero(value);
+                                },
+                                keyboardType: TextInputType.name,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  icon: const Icon(
+                                    Icons.search,
+                                    color: Colors.white,
+                                  ),
+                                  hintText: 'Search',
+                                  hintStyle: TextStyle(
+                                      color: primaryTextColor.withOpacity(0.5),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18),
+                                ),
+                              ),
+                            ),
+                          ),
+                          // Text('Hero Count: ${controller.searchKey.isEmpty ? controller.heroes.length : controller.searchList.length}',
+                          //   style: const TextStyle(
+                          //       fontSize: 24,
+                          //       color: Colors.white
+                          //   ),),
+                          HeroList(
+                            heroes: searchTextController.text.isEmpty ? controller.heroes : controller.searchList,
+                            controller: controller,
+                          )
+                        ],
                       )))
       ]),
+    );
+  }
+}
+
+class HeroList extends StatelessWidget {
+  HomeController controller;
+  List<Superhero> heroes;
+
+  HeroList({required this.controller, required this.heroes});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GridView.builder(
+        padding: const EdgeInsets.all(0.0),
+        itemCount: heroes.length,
+        itemBuilder: (context, index) {
+          var item = heroes[index];
+          return HeroItem(
+            superhero: item,
+            onHeroClick: (Superhero hero) {
+              // print(hero.name);
+              Get.toNamed(HeroDetailsScreen.route,
+                  arguments: {'heroId': hero.id});
+            },
+          );
+        },
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 3 / 4,
+        ),
+      ),
     );
   }
 }

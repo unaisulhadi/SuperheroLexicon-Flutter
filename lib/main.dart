@@ -43,8 +43,8 @@ class MyApp extends StatelessWidget {
       initialBinding: HomeBinding(),
       getPages: [
         GetPage(name: SplashScreen.route, page: () => const SplashScreen()),
-        GetPage(name: HomeScreen.route, page: () => const HomeScreen(),binding: HomeBinding()),
-        GetPage(name: HeroDetailsScreen.route, page: () => const HeroDetailsScreen(),binding: HeroDetailsBinding()),
+        GetPage(name: HomeScreen.route, page: () => HomeScreen(),binding: HomeBinding()),
+        GetPage(name: HeroDetailsScreen.route, page: () => HeroDetailsScreen(),binding: HeroDetailsBinding()),
     ],
     );
   }

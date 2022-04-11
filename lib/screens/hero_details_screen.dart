@@ -12,14 +12,14 @@ import 'package:superhero_flutter/theme/colors.dart';
 class HeroDetailsScreen extends StatelessWidget {
   static const route = "/hero_details";
 
-  const HeroDetailsScreen({Key? key}) : super(key: key);
+  HeroDetailsScreen({Key? key}) : super(key: key);
+  final controller = Get.find<HeroDetailsController>();
+  final heroId = Get.arguments['heroId'] ?? 0;
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<HeroDetailsController>();
-    final heroId = Get.arguments['heroId'] ?? 0;
-
     controller.getHeroDetails(heroId.toString());
+    print("BUILD DETAILS.......");
 
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
@@ -59,7 +59,7 @@ class HeroDetails extends StatelessWidget {
             children: [
               Image.network(
                 superhero.images.lg,
-                height: 420,
+                height: 460,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
@@ -91,10 +91,15 @@ class HeroDetails extends StatelessWidget {
           HeroPowerStats(powerstats: superhero.powerstats),
           HeroAliases(aliases: superhero.biography.aliases),
           HeroAppearance(appearance: superhero.appearance),
-          HeroMoreDetails(title: "OCCUPATION",details: superhero.work.occupation),
-          HeroMoreDetails(title: "BASE",details: superhero.work.base),
-          HeroMoreDetails(title: "GROUP AFFILIATION",details: superhero.connections?.groupAffiliation ?? "-"),
-          HeroMoreDetails(title: "RELATIVES",details: superhero.connections?.relatives ?? "-"),
+          HeroMoreDetails(
+              title: "OCCUPATION", details: superhero.work.occupation),
+          HeroMoreDetails(title: "BASE", details: superhero.work.base),
+          HeroMoreDetails(
+              title: "GROUP AFFILIATION",
+              details: superhero.connections?.groupAffiliation ?? "-"),
+          HeroMoreDetails(
+              title: "RELATIVES",
+              details: superhero.connections?.relatives ?? "-"),
         ],
       ),
     );

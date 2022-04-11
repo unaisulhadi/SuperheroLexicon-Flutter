@@ -15,6 +15,7 @@ class HeroDetailsController extends GetxController{
   late Rx<Superhero?> hero;
 
   getHeroDetails(String heroId) async{
+    print("<<<<<<FETCHING>>>>>>");
     isLoading.value = true;
     var result = await _httpService.getSuperheroDetails(heroId);
     isLoading.value = false;

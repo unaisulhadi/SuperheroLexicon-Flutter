@@ -12,13 +12,23 @@ class HomeController extends GetxController {
   }
 
   var isLoading = false.obs;
-  late RxList<Superhero> heroes;
+  RxList<Superhero> heroes = <Superhero>[].obs;
+  RxList<Superhero> searchList = <Superhero>[].obs;
+
+  RxString searchKey = "".obs;
 
   void getSuperheroes() async {
     isLoading.value = true;
     var result = await _httpService.getSuperheroes();
     isLoading.value = false;
-    heroes = result.obs;
+    heroes.value = result.obs;
+  }
+
+  void searchSuperhero(String key){
+    searchList.value
+    =  heroes.where((hero) => hero.name.toLowerCase().contains(searchKey.toLowerCase())).toList();
+    print("Searching");
+    print(searchList);
   }
 
 }
