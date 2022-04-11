@@ -20,10 +20,11 @@ class StatView extends StatelessWidget {
                 width: 65,
                 height: 65,
                 child: CircularProgressIndicator(
-                  value: value.toDouble(),
+                  //value: value.toDouble(),
+                  value:(value / 100),
                   valueColor:
                       const AlwaysStoppedAnimation<Color>(primaryTextColor),
-                  color: Colors.white,
+                  backgroundColor: Colors.white.withOpacity(0.3),
                 ),
               ),
               Text(
