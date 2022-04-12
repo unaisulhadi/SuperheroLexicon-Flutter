@@ -8,7 +8,7 @@ class HomeController extends GetxController {
 
   HomeController() {
     _httpService = Get.find<HttpServiceImpl>();
-    getSuperheroes();
+    fetchSuperheroes();
   }
 
   var isLoading = false.obs;
@@ -17,18 +17,20 @@ class HomeController extends GetxController {
 
   RxString searchKey = "".obs;
 
-  void getSuperheroes() async {
+  void fetchSuperheroes() async {
     isLoading.value = true;
     var result = await _httpService.getSuperheroes();
     isLoading.value = false;
-    heroes.value = result.obs;
+    heroes.value = result;
   }
 
-  void searchSuperhero(String key){
-    searchList.value
-    =  heroes.where((hero) => hero.name.toLowerCase().contains(searchKey.toLowerCase())).toList();
-    print("Searching");
-    print(searchList);
+  List<Superhero> getHeroes(){
+    return heroes.where((hero) => hero.name.toLowerCase().contains(searchKey.toLowerCase())).toList();
   }
+
+  // void searchSuperhero(){
+  //   searchList.value
+  //   =
+  // }
 
 }

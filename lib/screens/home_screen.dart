@@ -42,14 +42,7 @@ class HomeScreen extends StatelessWidget {
               )
             : Expanded(
                 child: controller.heroes.isEmpty
-                    ? const Center(
-                        child: Text(
-                        "Looks like there is no one left..!!",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ))
+                    ? EmptyHeroes()
                     : Column(
                         children: [
                           Padding(
@@ -69,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                                 maxLines: 1,
                                 onChanged: (value) {
                                   controller.searchKey.value = value;
-                                  controller.searchSuperhero(value);
+                                  //controller.searchSuperhero();
                                 },
                                 keyboardType: TextInputType.name,
                                 style: const TextStyle(
@@ -91,19 +84,39 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          // Text('Hero Count: ${controller.searchKey.isEmpty ? controller.heroes.length : controller.searchList.length}',
+                          // Text('Hero Count: ${controller.getHeroes().length}',
                           //   style: const TextStyle(
                           //       fontSize: 24,
                           //       color: Colors.white
                           //   ),),
+                          controller.getHeroes().isNotEmpty ?
                           HeroList(
-                            heroes: searchTextController.text.isEmpty ? controller.heroes : controller.searchList,
+                            heroes: controller.getHeroes(),
                             controller: controller,
-                          )
+                          ) : EmptyHeroes(message: "No results found!")
                         ],
                       )))
       ]),
     );
+  }
+}
+
+class EmptyHeroes extends StatelessWidget {
+  String message;
+  EmptyHeroes({
+    this.message = "Looks like there is no one left..!!",
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: Text(
+        message,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+        ),
+      ));
   }
 }
 
