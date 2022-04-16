@@ -16,6 +16,9 @@
 Just clone this repo and open in Intellj IDEA, VS Code or any code editor.
 <br />
 
+## 🚀 Jetpack Compose Version
+If you are looking for Jetpack Compose version of this project, <a href="https://github.com/unaisulhadi/SuperheroLexicon">Get it here </a>
+
 ## 🍰  Contribute  
 
 Feel free to fork this project, to optimise the code or to add new features. 
